@@ -3,6 +3,10 @@
 \#*\#
 .DS_Store
 
+# Local configs
+
+/NotesDemo/app/google-services.json
+
 # Android Studio
 *.iml
 .gradle

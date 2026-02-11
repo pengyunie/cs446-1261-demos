@@ -3,45 +3,27 @@ package ca.uwaterloo.cs446.notes
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import ca.uwaterloo.cs446.notes.ui.theme.NotesDemoTheme
+import com.google.firebase.BuildConfig
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            NotesDemoTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+
+        // TODO: for debugging against the Firebase Local Emulator Suite; delete before release
+        configureFirebaseServices()
+
+        setContent { NotesApp() }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NotesDemoTheme {
-        Greeting("Android")
+    private fun configureFirebaseServices() {
+        if (BuildConfig.DEBUG) {
+            Firebase.auth.useEmulator(LOCALHOST, AUTH_PORT)
+            Firebase.firestore.useEmulator(LOCALHOST, FIRESTORE_PORT)
+        }
     }
 }

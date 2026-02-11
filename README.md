@@ -4,3 +4,5 @@ This repository (will) hosts the demos that will be covered in the course.
 
 - [Course website](https://pengyunie.github.io/cs446-1261/)
 - [Previous version](https://github.com/pengyunie/CS446Demo1251)
+
+- NotesDemo created based on https://github.com/FirebaseExtended/firebase-video-samples/tree/main/fundamentals/android/auth-sign-in-with-google/Notes
